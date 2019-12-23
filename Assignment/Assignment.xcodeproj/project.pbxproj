@@ -15,6 +15,9 @@
 		C8ACB44323B091F800F3BA96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8ACB44123B091F800F3BA96 /* LaunchScreen.storyboard */; };
 		C8ACB44E23B091F800F3BA96 /* AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB44D23B091F800F3BA96 /* AssignmentTests.swift */; };
 		C8ACB45923B091F900F3BA96 /* AssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB45823B091F900F3BA96 /* AssignmentUITests.swift */; };
+		C8ACB46A23B0E8D200F3BA96 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB46923B0E8D200F3BA96 /* DetailsViewModel.swift */; };
+		C8ACB46D23B0E8F600F3BA96 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB46C23B0E8F600F3BA96 /* Service.swift */; };
+		C8ACB46F23B0E90D00F3BA96 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB46E23B0E90D00F3BA96 /* DetailsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		C8ACB45423B091F800F3BA96 /* AssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8ACB45823B091F900F3BA96 /* AssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentUITests.swift; sourceTree = "<group>"; };
 		C8ACB45A23B091F900F3BA96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8ACB46923B0E8D200F3BA96 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		C8ACB46C23B0E8F600F3BA96 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		C8ACB46E23B0E90D00F3BA96 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +105,12 @@
 		C8ACB43523B091F400F3BA96 /* Assignment */ = {
 			isa = PBXGroup;
 			children = (
+				C8ACB46B23B0E8E100F3BA96 /* Services */,
+				C8ACB46823B0E88900F3BA96 /* Controllers */,
+				C8ACB46723B0E87E00F3BA96 /* viewModel */,
+				C8ACB46623B0E87300F3BA96 /* Model */,
 				C8ACB43623B091F400F3BA96 /* AppDelegate.swift */,
 				C8ACB43823B091F400F3BA96 /* SceneDelegate.swift */,
-				C8ACB43A23B091F400F3BA96 /* ViewController.swift */,
 				C8ACB43C23B091F400F3BA96 /* Main.storyboard */,
 				C8ACB43F23B091F800F3BA96 /* Assets.xcassets */,
 				C8ACB44123B091F800F3BA96 /* LaunchScreen.storyboard */,
@@ -126,6 +135,38 @@
 				C8ACB45A23B091F900F3BA96 /* Info.plist */,
 			);
 			path = AssignmentUITests;
+			sourceTree = "<group>";
+		};
+		C8ACB46623B0E87300F3BA96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8ACB46E23B0E90D00F3BA96 /* DetailsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8ACB46723B0E87E00F3BA96 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C8ACB46923B0E8D200F3BA96 /* DetailsViewModel.swift */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		C8ACB46823B0E88900F3BA96 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C8ACB43A23B091F400F3BA96 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C8ACB46B23B0E8E100F3BA96 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C8ACB46C23B0E8F600F3BA96 /* Service.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +302,10 @@
 			files = (
 				C8ACB43B23B091F400F3BA96 /* ViewController.swift in Sources */,
 				C8ACB43723B091F400F3BA96 /* AppDelegate.swift in Sources */,
+				C8ACB46D23B0E8F600F3BA96 /* Service.swift in Sources */,
 				C8ACB43923B091F400F3BA96 /* SceneDelegate.swift in Sources */,
+				C8ACB46F23B0E90D00F3BA96 /* DetailsModel.swift in Sources */,
+				C8ACB46A23B0E8D200F3BA96 /* DetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
