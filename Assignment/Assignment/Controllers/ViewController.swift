@@ -246,7 +246,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
             if(error == nil){
                 //response success
                 
-                self._DetailsVM = response?.map({ return DetailsViewModel(detail: $0) }) ?? []
+                self._DetailsVM = response?.map({
+                    return DetailsViewModel(detail: $0)
+                }) ?? []
+                
                 //UI Changes on MAin thread
                 DispatchQueue.main.async{
                     //Navigation bar
