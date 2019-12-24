@@ -22,6 +22,7 @@
 		C8ACB46D23B0E8F600F3BA96 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB46C23B0E8F600F3BA96 /* Service.swift */; };
 		C8ACB46F23B0E90D00F3BA96 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB46E23B0E90D00F3BA96 /* DetailsModel.swift */; };
 		C8ACB47223B1D73400F3BA96 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB47123B1D73400F3BA96 /* AppStrings.swift */; };
+		C8ACB47823B1E7AF00F3BA96 /* Utills.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ACB47723B1E7AF00F3BA96 /* Utills.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		C8ACB46C23B0E8F600F3BA96 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		C8ACB46E23B0E90D00F3BA96 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		C8ACB47123B1D73400F3BA96 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
+		C8ACB47723B1E7AF00F3BA96 /* Utills.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utills.swift; sourceTree = "<group>"; };
 		D3DF5191A3B0DFC2E8600A9C /* Pods-Assignment-AssignmentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment-AssignmentUITests.debug.xcconfig"; path = "Target Support Files/Pods-Assignment-AssignmentUITests/Pods-Assignment-AssignmentUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8319DAD893EB16FB43185E8 /* Pods_Assignment_AssignmentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment_AssignmentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 		C8ACB43523B091F400F3BA96 /* Assignment */ = {
 			isa = PBXGroup;
 			children = (
+				C8ACB47623B1E79700F3BA96 /* AppUtills */,
 				C8ACB47023B1D66A00F3BA96 /* AppConstant */,
 				C8ACB46B23B0E8E100F3BA96 /* Services */,
 				C8ACB46823B0E88900F3BA96 /* Controllers */,
@@ -218,6 +221,14 @@
 				C8ACB47123B1D73400F3BA96 /* AppStrings.swift */,
 			);
 			path = AppConstant;
+			sourceTree = "<group>";
+		};
+		C8ACB47623B1E79700F3BA96 /* AppUtills */ = {
+			isa = PBXGroup;
+			children = (
+				C8ACB47723B1E7AF00F3BA96 /* Utills.swift */,
+			);
+			path = AppUtills;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,6 +474,7 @@
 				C8ACB43723B091F400F3BA96 /* AppDelegate.swift in Sources */,
 				C8ACB46D23B0E8F600F3BA96 /* Service.swift in Sources */,
 				C8ACB43923B091F400F3BA96 /* SceneDelegate.swift in Sources */,
+				C8ACB47823B1E7AF00F3BA96 /* Utills.swift in Sources */,
 				C8ACB47223B1D73400F3BA96 /* AppStrings.swift in Sources */,
 				C8ACB46F23B0E90D00F3BA96 /* DetailsModel.swift in Sources */,
 				C8ACB46A23B0E8D200F3BA96 /* DetailsViewModel.swift in Sources */,

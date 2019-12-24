@@ -15,9 +15,19 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(red: 235.0/255.0, green: 237.0/255.0, blue: 237.0/255.0, alpha: 1.0)
+        if(isConnectedToInternet()){
+            tableViewCreator()
+        }else{
+            errorViewCreator()
+        }
+    }
+    
+    func tableViewCreator(){
         getData()
         
-        let barHeight: CGFloat = 90.0
+        
         
         _detailsTableView = UITableView()
         _detailsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -38,6 +48,61 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
     }
     
+    func errorViewCreator(){
+        let mErrorView : UIView = UIView()
+        mErrorView.backgroundColor = UIColor(red: 235.0/255.0, green: 237.0/255.0, blue: 237.0/255.0, alpha: 1.0)
+        
+        self.view.addSubview(mErrorView)
+        mErrorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mErrorView.translatesAutoresizingMaskIntoConstraints = false
+        mErrorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        mErrorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        mErrorView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 0.0).isActive = true
+        mErrorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
+        
+        let mErrorStackView : UIStackView = UIStackView()
+        mErrorStackView.axis = .vertical
+        // mErrorStackView.distribution = .fillProportionally
+        mErrorStackView.spacing = 10
+        
+        mErrorView.addSubview(mErrorStackView)
+        mErrorStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mErrorStackView.centerXAnchor.constraint(equalTo: mErrorView.centerXAnchor).isActive = true
+        mErrorStackView.centerYAnchor.constraint(equalTo: mErrorView.centerYAnchor).isActive = true
+        
+        let mErrorLabel : UILabel = UILabel()
+        mErrorLabel.text = "No Internet connection.\n Please Tap to Re-try"
+        mErrorLabel.textAlignment = .center
+        mErrorLabel.layer.borderWidth = 0.0
+        mErrorLabel.lineBreakMode = .byWordWrapping
+        mErrorLabel.numberOfLines = 2
+        
+        
+        let  mRetryBtn : UIButton = UIButton()
+        mRetryBtn.backgroundColor =  UIColor.lightGray
+        mRetryBtn.setTitle("Retry", for: .normal)
+        mRetryBtn.setTitleColor(UIColor.black, for: .normal)
+        mRetryBtn.layer.cornerRadius = 8.0
+        mRetryBtn.layer.borderWidth = 2.0
+        mRetryBtn.layer.borderColor = UIColor.black.cgColor
+        mRetryBtn.addTarget(self, action:  #selector(submitButtonPressed) , for: .touchUpInside)
+        
+        
+        mErrorStackView.addArrangedSubview(mErrorLabel)
+        mErrorStackView.addArrangedSubview(mRetryBtn)
+        
+        mErrorLabel.translatesAutoresizingMaskIntoConstraints = false
+        mRetryBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        mErrorLabel.leadingAnchor.constraint(equalTo: mErrorStackView.leadingAnchor).isActive = true
+        mErrorLabel.trailingAnchor.constraint(equalTo: mErrorStackView.trailingAnchor).isActive = true
+        
+        mRetryBtn.heightAnchor.constraint(equalToConstant: isIPad() ? 60.0 : 40.0 ).isActive = true
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _DetailsVM.count
@@ -58,9 +123,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         return UITableViewAutomaticDimension
     }
     
-    func isIPad() -> Bool {
-        return (UIDevice.current.userInterfaceIdiom == .pad)
-    }
+    
     
     
     func getData(){
@@ -95,7 +158,19 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     @objc func refreshView() {
-        getData()
+        if(isConnectedToInternet()){
+            tableViewCreator()
+        }else{
+            errorViewCreator()
+        }
+    }
+    
+    @objc func submitButtonPressed() {
+        if(isConnectedToInternet()){
+            tableViewCreator()
+        }else{
+            return
+        }
     }
 }
 
