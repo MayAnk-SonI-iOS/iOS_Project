@@ -14,7 +14,6 @@ class Service: NSObject {
     static let sharedInstance = Service()
     static var _navTitle : String = ""
     func getAllData(completion : @escaping([DetailsModel]?,Error?) ->()){
-        let mURLString : String = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/dacts.json"
         guard let url = URL(string : mURLString) else{ return }
         URLSession.shared.dataTask(with: url){(data,reponse,error) in
             if let err = error{

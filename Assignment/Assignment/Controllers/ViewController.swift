@@ -8,15 +8,61 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
+    
     var _DetailsVM = [DetailsViewModel]()
-
+    private var _detailsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-   getData()
+        getData()
+        
+        let barHeight: CGFloat = 90.0
+        
+        _detailsTableView = UITableView()
+        _detailsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        _detailsTableView.separatorStyle = .none
+        
+        _detailsTableView.dataSource = self
+        _detailsTableView.delegate = self
+        _detailsTableView.estimatedRowHeight = 100.0
+        _detailsTableView.rowHeight = UITableViewAutomaticDimension
+        self.view.addSubview(_detailsTableView)
+        _detailsTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        _detailsTableView.translatesAutoresizingMaskIntoConstraints = false
+        _detailsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        _detailsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        _detailsTableView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: barHeight).isActive = true
+        _detailsTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
     }
-
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return _DetailsVM.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell  = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func isIPad() -> Bool {
+        return (UIDevice.current.userInterfaceIdiom == .pad)
+    }
+    
+    
     func getData(){
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         
@@ -39,7 +85,7 @@ class ViewController: UIViewController {
                     let doneBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.refresh, target: nil, action: #selector(self.refreshView))
                     navigationItem.rightBarButtonItem = doneBtn
                     navigationBar.setItems([navigationItem], animated: false)
-                  
+                    
                     self.dismiss(animated: false, completion: nil)
                 }
                 print(self._DetailsVM)
@@ -47,10 +93,9 @@ class ViewController: UIViewController {
             
         }
     }
-
-     @objc func refreshView() {
+    
+    @objc func refreshView() {
         getData()
-        
     }
 }
 
