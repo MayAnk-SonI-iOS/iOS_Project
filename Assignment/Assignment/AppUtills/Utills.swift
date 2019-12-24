@@ -9,11 +9,12 @@
 import Foundation
 import Alamofire
 
-
+//Checks internet connectivity on device
 func isConnectedToInternet() -> Bool {
     return NetworkReachabilityManager()!.isReachable
 }
 
+//Returns the device type
 func isIPad() -> Bool {
        return (UIDevice.current.userInterfaceIdiom == .pad)
    }

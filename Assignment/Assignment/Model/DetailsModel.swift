@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+//Model class for json parssing
 class DetailsModel: Decodable {
     
     var title:String?
