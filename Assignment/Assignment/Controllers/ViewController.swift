@@ -88,7 +88,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let mErrorLabel : UILabel = UILabel()
         mErrorLabel.text = "No Internet connection.\n Please Tap to Re-try"
         mErrorLabel.textAlignment = .center
-        mErrorLabel.layer.borderWidth = 0.0
         mErrorLabel.lineBreakMode = .byWordWrapping
         mErrorLabel.numberOfLines = 2
         
@@ -151,7 +150,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let mOuterStackView : UIStackView = UIStackView()
         mOuterStackView.axis = .vertical
         mOuterStackView.distribution = .fill
-        mOuterStackView.layer.borderWidth = 0.0
         mOuterStackView.spacing = 10
         
         //title label
@@ -159,7 +157,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mTitleLabel.text = _DetailsVM[indexPath.row].title
         mTitleLabel.font = UIFont.boldSystemFont(ofSize: isIPad() ? 30 : 20)
         mTitleLabel.textColor = UIColor.black
-        mTitleLabel.layer.borderWidth = 0.0
         mTitleLabel.lineBreakMode = .byWordWrapping
         mTitleLabel.numberOfLines = 3
         mTitleLabel.textAlignment = .center
@@ -168,7 +165,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         //discription label
         let  mDiscriptionLabel  : UILabel = UILabel()
         mDiscriptionLabel.text = _DetailsVM[indexPath.row].description1
-        mDiscriptionLabel.layer.borderWidth = 0.0
         mDiscriptionLabel.lineBreakMode = .byWordWrapping
         mDiscriptionLabel.numberOfLines = 0
         mDiscriptionLabel.font = UIFont.systemFont(ofSize: isIPad() ? 25 : 16)
@@ -229,7 +225,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
             mErrorLabel.translatesAutoresizingMaskIntoConstraints = false
             
             mErrorLabel.heightAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
-            mErrorLabel.widthAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
         }
           
         mBackView.addSubview(mOuterStackView)
