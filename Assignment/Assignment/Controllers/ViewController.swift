@@ -175,31 +175,11 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mDiscriptionLabel.textColor = UIColor(red: 117.0/255.0, green: 117.0/255.0, blue: 117.0/255.0, alpha: 1.0)
         mDiscriptionLabel.textAlignment = .justified
         
-        //Image view
-        let mImageView : UIImageView = UIImageView()
-        mImageView.contentMode = .scaleAspectFit
-        
-        //Check for url validation
-        if(_DetailsVM[indexPath.row].imageHref != ""){
-            let mImageUrl : URL? = URL(string: _DetailsVM[indexPath.row].imageHref!)!
-            mImageView.pin_updateWithProgress = true
-            
-            mImageView.pin_setPlaceholder(with: UIImage.init(named: "placeholder"))
-            if let url : URL = mImageUrl{
-                DispatchQueue.main.async {
-                    mImageView.pin_setImage(from: url, completion: { (_) in
-                    })
-                    
-                }
-            }
-        }
         
         //Binding wigets in stackview
         mOuterStackView.addArrangedSubview(mTitleLabel)
         mOuterStackView.addArrangedSubview(mDiscriptionLabel)
-        mOuterStackView.addArrangedSubview(mImageView)
         
-        mImageView.translatesAutoresizingMaskIntoConstraints = false
         mDiscriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         mTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -210,9 +190,48 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mDiscriptionLabel.leadingAnchor.constraint(equalTo: mOuterStackView.leadingAnchor).isActive = true
         mDiscriptionLabel.trailingAnchor.constraint(equalTo: mOuterStackView.trailingAnchor).isActive = true
         
-        mImageView.heightAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
-        mImageView.widthAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
+     
+        //Image view
         
+          //Check for url validation
+          if(_DetailsVM[indexPath.row].imageHref != ""){
+              let mImageView : UIImageView = UIImageView()
+                    mImageView.contentMode = .scaleAspectFit
+                    
+              let mImageUrl : URL? = URL(string: _DetailsVM[indexPath.row].imageHref!)!
+              mImageView.pin_updateWithProgress = true
+              
+              mImageView.pin_setPlaceholder(with: UIImage.init(named: "placeholder"))
+              if let url : URL = mImageUrl{
+                  DispatchQueue.main.async {
+                      mImageView.pin_setImage(from: url, completion: { (_) in
+                         
+                      })
+                      
+                  }
+              }
+              
+              mOuterStackView.addArrangedSubview(mImageView)
+              
+              mImageView.translatesAutoresizingMaskIntoConstraints = false
+              mImageView.heightAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
+              mImageView.widthAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
+              
+          }else{
+            
+            let mErrorLabel : UILabel = UILabel()
+            mErrorLabel.text = "URL not present"
+            mErrorLabel.textAlignment = .center
+            mErrorLabel.textColor = UIColor.red
+            mErrorLabel.font = UIFont.boldSystemFont(ofSize: isIPad() ? 30 : 20)
+            
+            mOuterStackView.addArrangedSubview(mErrorLabel)
+            mErrorLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            mErrorLabel.heightAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
+            mErrorLabel.widthAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
+        }
+          
         mBackView.addSubview(mOuterStackView)
         mOuterStackView.translatesAutoresizingMaskIntoConstraints = false
         mOuterStackView.leadingAnchor.constraint(equalTo: mBackView.leadingAnchor, constant : 0).isActive = true
@@ -231,9 +250,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    
-    
     
     func getData(){
         
