@@ -16,5 +16,5 @@ func isConnectedToInternet() -> Bool {
 
 //Returns the device type
 func isIPad() -> Bool {
-       return (UIDevice.current.userInterfaceIdiom == .pad)
-   }
+    return (UIDevice.current.userInterfaceIdiom == .pad)
+}

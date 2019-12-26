@@ -8,9 +8,10 @@
 
 import UIKit
 import PINRemoteImage
+import SDWebImage
 
 class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
-   
+    
     //Class level variables
     
     var _DetailsVM = [DetailsViewModel]()
@@ -21,7 +22,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         //Base view color
         self.view.backgroundColor = UIColor(red: 235.0/255.0, green: 237.0/255.0, blue: 237.0/255.0, alpha: 1.0)
-       
+        
         //Internet connection check
         if(isConnectedToInternet()){
             tableViewCreator()
@@ -31,10 +32,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableViewCreator(){
-      
+        
         // API call
         getData()
-       
+        
         // UITable View
         _detailsTableView = UITableView()
         _detailsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -71,7 +72,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mErrorView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 0.0).isActive = true
         mErrorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
-     
+        
         //StackView for elements binding
         let mErrorStackView : UIStackView = UIStackView()
         mErrorStackView.axis = .vertical
@@ -82,7 +83,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         mErrorStackView.centerXAnchor.constraint(equalTo: mErrorView.centerXAnchor).isActive = true
         mErrorStackView.centerYAnchor.constraint(equalTo: mErrorView.centerYAnchor).isActive = true
-       
+        
         //Error message label
         let mErrorLabel : UILabel = UILabel()
         mErrorLabel.text = "No Internet connection.\n Please Tap to Re-try"
@@ -91,7 +92,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mErrorLabel.lineBreakMode = .byWordWrapping
         mErrorLabel.numberOfLines = 2
         
-       //Retry Button
+        //Retry Button
         let  mRetryBtn : UIButton = UIButton()
         mRetryBtn.backgroundColor =  UIColor.lightGray
         mRetryBtn.setTitle("Retry", for: .normal)
@@ -129,10 +130,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
             return cell
         }
         
-       //cell properties
+        //cell properties
         cell.backgroundColor = UIColor.white
         cell.isUserInteractionEnabled = false
-     
+        
         //cell base view
         let mBackView : UIView = UIView()
         mBackView.backgroundColor = UIColor(red: 235.0/255.0, green: 237.0/255.0, blue: 237.0/255.0, alpha: 1.0)
@@ -145,7 +146,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mBackView.trailingAnchor.constraint(equalTo: cell.trailingAnchor,constant : isIPad() ?  -10 : -5).isActive = true
         mBackView.topAnchor.constraint(equalTo: cell.topAnchor, constant : 5).isActive = true
         mBackView.bottomAnchor.constraint(equalTo: cell.bottomAnchor,constant : -5).isActive = true
-       
+        
         //base StackView for data binding
         let mOuterStackView : UIStackView = UIStackView()
         mOuterStackView.axis = .vertical
@@ -177,27 +178,31 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         //Image view
         let mImageView : UIImageView = UIImageView()
         mImageView.contentMode = .scaleAspectFit
-     
-    //Check for url validation
+        
+        //Check for url validation
         if(_DetailsVM[indexPath.row].imageHref != ""){
             let mImageUrl : URL? = URL(string: _DetailsVM[indexPath.row].imageHref!)!
             mImageView.pin_updateWithProgress = true
+            
             mImageView.pin_setPlaceholder(with: UIImage.init(named: "placeholder"))
             if let url : URL = mImageUrl{
-                mImageView.pin_setImage(from: url, completion: { (_) in
-                })
+                DispatchQueue.main.async {
+                    mImageView.pin_setImage(from: url, completion: { (_) in
+                    })
+                    
+                }
             }
         }
         
-     //Binding wigets in stackview
-       mOuterStackView.addArrangedSubview(mTitleLabel)
+        //Binding wigets in stackview
+        mOuterStackView.addArrangedSubview(mTitleLabel)
         mOuterStackView.addArrangedSubview(mDiscriptionLabel)
         mOuterStackView.addArrangedSubview(mImageView)
         
         mImageView.translatesAutoresizingMaskIntoConstraints = false
         mDiscriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         mTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-            
+        
         
         mTitleLabel.leadingAnchor.constraint(equalTo: mOuterStackView.leadingAnchor).isActive = true
         mTitleLabel.trailingAnchor.constraint(equalTo: mOuterStackView.trailingAnchor).isActive = true
@@ -205,7 +210,8 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         mDiscriptionLabel.leadingAnchor.constraint(equalTo: mOuterStackView.leadingAnchor).isActive = true
         mDiscriptionLabel.trailingAnchor.constraint(equalTo: mOuterStackView.trailingAnchor).isActive = true
         
-        
+        mImageView.heightAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
+        mImageView.widthAnchor.constraint(equalToConstant: isIPad() ? 250.0 : 200.0).isActive = true
         
         mBackView.addSubview(mOuterStackView)
         mOuterStackView.translatesAutoresizingMaskIntoConstraints = false

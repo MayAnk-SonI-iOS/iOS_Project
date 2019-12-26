@@ -10,7 +10,7 @@ import UIKit
 
 
 class Service: NSObject {
-
+    
     //Singleton object for Service class
     static let sharedInstance = Service()
     
@@ -24,7 +24,7 @@ class Service: NSObject {
         //API call
         URLSession.shared.dataTask(with: url){(data,reponse,error) in
             if let err = error{
-           //Error received
+                //Error received
                 completion(nil,err)
             }else{
                 //Sucess

@@ -9,11 +9,11 @@
 import UIKit
 
 class DetailsViewModel: NSObject {
-
-      var title:String?
-      var description1 : String?
-      var imageHref:String?
-      
+    
+    var title:String?
+    var description1 : String?
+    var imageHref:String?
+    
     
     //Dependency Injection
     
@@ -23,3 +23,5 @@ class DetailsViewModel: NSObject {
         self.imageHref = detail.imageHref
     }
 }
+
+

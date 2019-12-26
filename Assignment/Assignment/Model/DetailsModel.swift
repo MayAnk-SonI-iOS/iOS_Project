@@ -15,20 +15,20 @@ class DetailsModel: Decodable {
     var description:String?
     var imageHref:String?
     
-     init(title : String,description : String,imageHref : String) {
+    init(title : String,description : String,imageHref : String) {
         self.title = title
         self.description = description
         self.imageHref = imageHref
     }
-
+    
 }
 
 class JSResponse: Decodable {
-
+    
     var title : String?
     var rows:[DetailsModel]
     
-     init(title : String,rows : [DetailsModel]) {
+    init(title : String,rows : [DetailsModel]) {
         self.title = title
         self.rows = rows
     }
