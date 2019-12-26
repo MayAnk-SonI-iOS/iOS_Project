@@ -44,7 +44,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         _detailsTableView.dataSource = self
         _detailsTableView.delegate = self
         _detailsTableView.estimatedRowHeight = 100.0
-        _detailsTableView.rowHeight = UITableViewAutomaticDimension
+        _detailsTableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(_detailsTableView)
         
         //UITableView Autolayout enable
@@ -225,11 +225,11 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //cell dinamic height
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -241,7 +241,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorView.Style.medium
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
         loadingIndicator.startAnimating();
         
         alert.view.addSubview(loadingIndicator)
