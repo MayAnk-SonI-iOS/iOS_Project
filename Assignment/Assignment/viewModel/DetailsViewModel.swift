@@ -9,19 +9,48 @@
 import UIKit
 
 class DetailsViewModel: NSObject {
+    var detailsModel: JSResponse?
+        
+        var title: String {
+            return detailsModel?.title ?? "Title not available"
+        }
+        
+        var rows: [DetailsModel] {
+            
+            return detailsModel?.rows ?? []
+        }
+        
+        init(pJsonResponse: JSResponse) {
+            self.detailsModel = pJsonResponse
+        }
+    }
+
+
+
+
+
+class DetailsRowViewModel: NSObject {
+    var mDetailsRowModel: DetailsModel?
     
-    var title:String?
-    var description1 : String?
-    var imageHref:String?
+    var title: String {
+        return mDetailsRowModel?.title ?? "No Title Available"
+    }
     
+    var desctiption: String {
+        return mDetailsRowModel?.description ?? "Description not available"
+    }
     
-    //Dependency Injection
-    
-    init(detail : DetailsModel){
-        self.title = detail.title
-        self.description1 = detail.description
-        self.imageHref = detail.imageHref
+    var imageHrefUrl: URL? {
+        if let imgHrefUrl = mDetailsRowModel?.imageHref {
+            // To convert string into URL
+            if let url = URL.init(string: imgHrefUrl) {
+                return url
+            }
+        }
+        return nil
+    }
+
+    init(pDetailsRowModel: DetailsModel) {
+        self.mDetailsRowModel = pDetailsRowModel
     }
 }
-
-

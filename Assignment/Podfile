@@ -9,6 +9,8 @@ pod 'SDWebImage'
 pod 'SwiftLint'
 pod 'PINRemoteImage'
 pod 'Alamofire'
+pod ‘SnapKit’
+
 
   # Pods for Assignment
 

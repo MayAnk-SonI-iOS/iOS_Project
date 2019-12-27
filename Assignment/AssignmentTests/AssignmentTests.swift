@@ -12,9 +12,20 @@ import XCTest
 class AssignmentTests: XCTestCase {
     
     
+    var _jsonResponseModel: JSResponse!
+    var _detailsModel: DetailsModel!
+    
+    var _detailsRowVM: DetailsRowViewModel!
+    var _detailsVM: DetailsViewModel!
+    
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
+        
+        _jsonResponseModel = JSResponse.init(title: "The XYZ", rows: [DetailsModel.init(title: "the ABC", description: "NO description", imageHref: "")])
+        
+        _detailsVM = DetailsViewModel.init(pJsonResponse: _jsonResponseModel)
         
     }
     
@@ -22,14 +33,15 @@ class AssignmentTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testDetailsViewModel(){
-        let mDetails = DetailsModel(title : "Test title",description : "tes discription",imageHref : "https://cdn1.iconfinder.com/data/icons/internet-technology-and-security-2/128/77-512.png")
-        let mDetailsViewModel = DetailsViewModel(detail: mDetails)
+    func testDetailsViewModel() {
         
-        XCTAssert((mDetails.title != nil) , mDetailsViewModel.title!)
-        XCTAssert((mDetails.description != nil) , mDetailsViewModel.description1!)
-        XCTAssert((mDetails.imageHref != nil) , mDetailsViewModel.imageHref!)
+        XCTAssertNotNil(_detailsVM, "Response VIew model")
+        
+        XCTAssertTrue(_detailsVM.detailsModel?.title == _detailsVM.title, "Response View model title is no correct" )
+        
+        XCTAssertTrue(_detailsVM.detailsModel?.rows.count == _detailsVM.rows.count, "Response rows array count is not correct" )
         
     }
+    
     
 }

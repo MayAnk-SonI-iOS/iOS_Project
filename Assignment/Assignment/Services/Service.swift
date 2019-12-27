@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 
 class Service: NSObject {
     
@@ -17,37 +17,30 @@ class Service: NSObject {
     static var _navTitle : String = ""
     
     //completion handler
-    func getAllData(completion : @escaping([DetailsModel]?,Error?) ->()){
+    func getAllData(completion : @escaping(JSResponse?,Error?) ->()){
         //grard protection for application crash
         guard let url = URL(string : mURLString) else{ return }
         
         //API call
-        URLSession.shared.dataTask(with: url){(data,reponse,error) in
-            if let err = error{
-                //Error received
-                completion(nil,err)
-            }else{
-                //Sucess
-                guard let data = data else{ return }
-                do {
-                    var mRowdata = [DetailsModel]()
-                    //Data to String conversion
-                    let utf8Data = String(decoding: data, as: UTF8.self).data(using: .utf8)
-                    //String to JSonResponse
-                    let response =  try JSONDecoder().decode(JSResponse.self, from: utf8Data!)
-                    //Adding data to model
-                    for row in response.rows{
-                        mRowdata.append(DetailsModel(title: row.title ?? "", description: row.description ?? "", imageHref: row.imageHref  ?? "" ))
+        Alamofire.request(url).responseData { (responseData) in
+            switch responseData.result {
+            case .success(let data):
+                
+                //Apply string encoding as response is not UTF 8 formatted
+                let string = String(decoding: data, as: UTF8.self)
+                if let datastr = string.data(using: String.Encoding.utf8) {
+                    //Map response data into model
+                    do {
+                        let response =  try JSONDecoder().decode(JSResponse.self, from: datastr)
+                        completion(response,nil)
+                    } catch let error as NSError {
+                        print(error)
+                        completion(nil, error)
                     }
-                    Service._navTitle = response.title!
-                    completion(mRowdata,nil)
-                } catch let jsonErr {
-                    //Ecexption handler
-                    print("Json Error : \(jsonErr.localizedDescription)")
                 }
+            case .failure(let error):
+                completion(nil, error)
             }
-        }.resume()
+        }
     }
-    
-    
 }

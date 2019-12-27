@@ -12,3 +12,5 @@ import UIKit
 let mURLString : String = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/dacts.json"
 
 let barHeight: CGFloat = 90.0
+
+let detailsDisplayCell = "cell"
