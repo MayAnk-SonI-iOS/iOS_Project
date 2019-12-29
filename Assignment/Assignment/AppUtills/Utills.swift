@@ -37,4 +37,19 @@ func showProgressindicator(){
 func hideProgressIndecator(){
     self.dismiss(animated: false, completion: nil)
 }
+    
+    func navigationbarintegration(pNavTitle : String){
+        let navigationBar: UINavigationBar = UINavigationBar()
+                           self.view.addSubview(navigationBar);
+                           let navigationItem = UINavigationItem(title: pNavTitle)
+                           navigationBar.setItems([navigationItem], animated: false)
+                           //Navigation bar autolayout
+                           navigationBar.translatesAutoresizingMaskIntoConstraints = false
+                           navigationBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+                           navigationBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+                           navigationBar.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 40.0).isActive = true
+                           navigationBar.heightAnchor.constraint(equalToConstant: 144.0).isActive = true
+                 
+    }
+    
 }

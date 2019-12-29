@@ -14,6 +14,7 @@ class ViewController: UIViewController{
     
     //Class level variables
     private var _detailsTableView: UITableView!
+    var refreshControl: UIRefreshControl?
     
     var _DetailsVM :DetailsViewModel?
     
@@ -53,7 +54,7 @@ class ViewController: UIViewController{
         // UITable View
         _detailsTableView = UITableView()
         _detailsTableView?.register(DetailsCell.self, forCellReuseIdentifier: "cell")
-        _detailsTableView?.accessibilityIdentifier = "table--countryInfoTableView"
+        _detailsTableView?.accessibilityIdentifier = "Details_TableView"
         _detailsTableView.separatorStyle = .none
         
         _detailsTableView?.delegate = self
@@ -72,6 +73,11 @@ class ViewController: UIViewController{
         _detailsTableView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: barHeight).isActive = true
         _detailsTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
+        
+        self.refreshControl = UIRefreshControl.init()
+        self.refreshControl?.addTarget(self, action: #selector(refreshView), for: .valueChanged)
+        self._detailsTableView?.addSubview(refreshControl!)
+        self._detailsTableView?.allowsSelection = false
     }
     
     func errorViewCreator(){
@@ -144,23 +150,11 @@ class ViewController: UIViewController{
                 //UI Changes on MAin thread
                 DispatchQueue.main.async{
                     //Navigation bar
-                    let navigationBar: UINavigationBar = UINavigationBar()
-                    self.view.addSubview(navigationBar);
-                    let navigationItem = UINavigationItem(title: response!.title!)
-                    let doneBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.refresh, target: nil, action: #selector(self.refreshView))
-                    navigationItem.rightBarButtonItem = doneBtn
-                    navigationBar.setItems([navigationItem], animated: false)
-                    //Navigation bar autolayout
-                    navigationBar.translatesAutoresizingMaskIntoConstraints = false
-                    navigationBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-                    navigationBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-                    navigationBar.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 40.0).isActive = true
-                    navigationBar.heightAnchor.constraint(equalToConstant: 144.0).isActive = true
+                    self.navigationbarintegration(pNavTitle : response!.title!)
                     //TableView Reload
                     self._detailsTableView.reloadData()
                     //Progress indicator removed
                     self.hideProgressIndecator()
-                    //  self.dismiss(animated: false, completion: nil)
                 }
             }
             
