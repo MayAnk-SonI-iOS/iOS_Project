@@ -25,27 +25,28 @@ class ViewController: UIViewController{
             guard let _detailsModel = _detailsModel else { return }
             _DetailsRowVM = DetailsViewModel.init(pJsonResponse: _detailsModel)
             DispatchQueue.main.async {
+                //TableView Reload
                 self._detailsTableView.reloadData()
             }
         }
     }
     
     
-        override func viewDidLoad() {
-            super.viewDidLoad()
-    
-            //Base view color
-            self.view.backgroundColor = UIColor(red: 235.0/255.0, green: 237.0/255.0, blue: 237.0/255.0, alpha: 1.0)
-    
-            //Internet connection check
-            if(isConnectedToInternet()){
-                tableViewCreator()
-            }else{
-                errorViewCreator()
-            }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Base view color
+        self.view.backgroundColor = UIColor(red: 235.0/255.0, green: 237.0/255.0, blue: 237.0/255.0, alpha: 1.0)
+        
+        //Internet connection check
+        if(isConnectedToInternet()){
+            tableViewCreator()
+        }else{
+            errorViewCreator()
         }
+    }
     
-
+    
     func tableViewCreator(){
         
         // API call
@@ -151,8 +152,6 @@ class ViewController: UIViewController{
                 DispatchQueue.main.async{
                     //Navigation bar
                     self.navigationbarintegration(pNavTitle : response!.title!)
-                    //TableView Reload
-                    self._detailsTableView.reloadData()
                     //Progress indicator removed
                     self.hideProgressIndecator()
                 }
